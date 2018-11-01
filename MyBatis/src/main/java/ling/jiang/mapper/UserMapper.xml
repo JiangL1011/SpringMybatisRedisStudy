@@ -9,12 +9,36 @@
     version: v1.0       
 -->
 <mapper namespace="ling.jiang.mapper.UserMapper">
+    <!--开启二级缓存，且POJO必须实现序列化接口，SqlSession必须提交-->
+    <cache/>
 
-    <select id="getUserById" resultType="user">
-      select * from auth_user where user_id = #{id}
+    <resultMap id="userMap" type="ling.jiang.pojo.User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_pass" property="userPass"/>
+        <association property="userRole" column="role_id" fetchType="lazy"
+                     select="ling.jiang.mapper.UserRoleMapper.getRoleByRoleId"/>
+    </resultMap>
+
+    <sql id="userCols">
+        t.user_id,t.user_name,t.user_pass,t.role_id
+    </sql>
+
+    <select id="getUserById" resultMap="userMap">
+        select
+        <include refid="userCols"/>
+        from auth_user t where t.user_id = #{id}
     </select>
 
-    <select id="getAllUsers" resultType="ling.jiang.pojo.User">
-      select * from auth_user
+    <select id="getAllUsers" resultMap="userMap">
+        select
+        <include refid="userCols"/>
+        from auth_user t
+    </select>
+
+    <select id="getUsersByRoleId" resultMap="userMap">
+        select
+        <include refid="userCols"/>
+        from auth_user t where t.role_id = #{roleId}
     </select>
 </mapper>

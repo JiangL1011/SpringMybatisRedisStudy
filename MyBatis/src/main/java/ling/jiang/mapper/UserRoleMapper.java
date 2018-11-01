@@ -1,5 +1,8 @@
 package ling.jiang.mapper;
 
+import ling.jiang.pojo.UserRole;
+import org.apache.ibatis.annotations.Param;
+
 /**
  * description:
  * author:  JiangL
@@ -8,4 +11,5 @@ package ling.jiang.mapper;
  * version: v1.0
  */
 public interface UserRoleMapper {
+    UserRole getRoleByRoleId(@Param("roleId") Integer roleId);
 }

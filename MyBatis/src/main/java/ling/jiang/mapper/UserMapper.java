@@ -1,6 +1,7 @@
 package ling.jiang.mapper;
 
 import ling.jiang.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,7 +13,9 @@ import java.util.List;
  * version: v1.0
  */
 public interface UserMapper {
-    User getUserById(Integer id);
+    User getUserById(@Param("id") Integer id);
 
     List<User> getAllUsers();
+
+    List<User> getUsersByRoleId(@Param("roleId") Integer roleId);
 }

@@ -1,5 +1,6 @@
 package ling.jiang.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,12 +10,12 @@ import java.util.List;
  * date:    11/1/2018
  * version: v1.0
  */
-public class UserRole {
-    private int roleId;
+public class UserRole implements Serializable {
+    private Integer roleId;
     private String roleName;
     private List<User> users;
 
-    public int getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
@@ -44,6 +45,13 @@ public class UserRole {
                 "roleId=" + roleId +
                 ", roleName='" + roleName + '\'' +
                 ", users=" + users +
+                '}';
+    }
+
+    public String toStringWithoutUsers() {
+        return "UserRole{" +
+                "roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
                 '}';
     }
 }

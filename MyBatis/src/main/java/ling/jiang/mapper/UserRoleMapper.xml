@@ -9,5 +9,17 @@
     version: v1.0       
 -->
 <mapper namespace="ling.jiang.mapper.UserRoleMapper">
+    <!--开启二级缓存，且POJO必须实现序列化接口，SqlSession必须提交-->
+    <cache/>
 
+    <resultMap id="roleMap" type="ling.jiang.pojo.UserRole">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <collection property="users" column="role_id" fetchType="lazy"
+                    select="ling.jiang.mapper.UserMapper.getUsersByRoleId"/>
+    </resultMap>
+
+    <select id="getRoleByRoleId" resultMap="roleMap">
+        select t.role_id,t.role_name from auth_role t where t.role_id = #{roleId}
+    </select>
 </mapper>

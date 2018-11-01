@@ -8,7 +8,15 @@
 
     <settings>
         <!--自动把数据库中的下划线命名法映射为java的驼峰命名法-->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
+
+        <!--启用延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--启用时，使带有延迟加载属性的对象完整加载，
+        反之，每种属性按需加载
+        版本 <= 3.4.1默认true，反之默认false,
+        同时，懒加载还受映射xml文件中配置的fetchType属性影响-->
+        <setting name="aggressiveLazyLoading" value="false"/>
     </settings>
 
     <typeAliases>

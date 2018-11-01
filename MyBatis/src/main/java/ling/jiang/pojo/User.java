@@ -1,5 +1,7 @@
 package ling.jiang.pojo;
 
+import java.io.Serializable;
+
 /**
  * description:
  * author:  JiangL
@@ -7,7 +9,7 @@ package ling.jiang.pojo;
  * date:    11/1/2018
  * version: v1.0
  */
-public class User {
+public class User implements Serializable {
     private Integer userId;
     private String userName;
     private String userPass;
@@ -51,7 +53,7 @@ public class User {
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", userPass='" + userPass + '\'' +
-                ", userRole=" + userRole +
+                ", userRole=" + userRole.toStringWithoutUsers() +
                 '}';
     }
 }
