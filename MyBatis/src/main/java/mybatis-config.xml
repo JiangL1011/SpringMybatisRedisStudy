@@ -4,8 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <settings>
+        <!--自动把数据库中的下划线命名法映射为java的驼峰命名法-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
     <typeAliases>
-        <typeAlias type="" alias=""/>
+        <typeAlias type="ling.jiang.pojo.User" alias="user"/>
+        <typeAlias type="ling.jiang.pojo.UserRole" alias="userRole"/>
     </typeAliases>
 
     <environments default="development">
@@ -13,8 +19,8 @@
             <transactionManager type="JDBC"/>
             <!--POOLED为mybatis内部提供的连接池-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/database"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/study_db?useSSL=true&amp;serverTimezone=UTC"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123456"/>
             </dataSource>
@@ -22,6 +28,7 @@
     </environments>
 
     <mappers>
-        <mapper class=""/>
+        <mapper class="ling.jiang.mapper.UserRoleMapper"/>
+        <mapper class="ling.jiang.mapper.UserMapper"/>
     </mappers>
 </configuration>
