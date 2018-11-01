@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <properties resource="dataSource.properties"/>
+
     <settings>
         <!--自动把数据库中的下划线命名法映射为java的驼峰命名法-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
@@ -19,10 +21,10 @@
             <transactionManager type="JDBC"/>
             <!--POOLED为mybatis内部提供的连接池-->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/study_db?useSSL=true&amp;serverTimezone=UTC"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <property name="driver" value="${database.driver}"/>
+                <property name="url" value="${database.url}"/>
+                <property name="username" value="${database.username}"/>
+                <property name="password" value="${database.password}"/>
             </dataSource>
         </environment>
     </environments>
