@@ -11,6 +11,7 @@
     <modules>
         <module>DesignPattern</module>
         <module>MyBatis</module>
+        <module>Spring</module>
     </modules>
 
 </project>

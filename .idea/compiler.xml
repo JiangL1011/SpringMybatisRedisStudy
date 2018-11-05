@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DesignPattern" />
         <module name="MyBatis" />
+        <module name="Spring" />
       </profile>
     </annotationProcessing>
   </component>
