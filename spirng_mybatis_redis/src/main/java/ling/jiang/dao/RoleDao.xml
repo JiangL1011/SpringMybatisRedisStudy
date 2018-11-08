@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    
+    description:        
+    author:  JiangL    
+    company:            
+    date:    2018年11月08日   
+    version: v1.0       
+-->
+<mapper namespace="ling.jiang.dao.RoleDao">
+
+    <select id="getRole" resultType="ling.jiang.pojo.Role">
+      select id, role_name as roleName, note from t_role where id = #{id}
+    </select>
+
+    <delete id="deleteRole">
+      delete from t_role where id = #{id}
+    </delete>
+
+    <insert id="insertRole">
+      insert into t_role (role_name, note) values (#{role.roleName} ,#{role.note} )
+    </insert>
+
+    <update id="updateRole">
+      update t_role set role_name = #{role.roleName} , note = #{role.note} where id = #{role.id}
+    </update>
+
+    <select id="findRoles" resultType="ling.jiang.pojo.Role">
+        select id, role_name as roleName, note from t_role
+        <where>
+            <if test="roleName != null and roleName != ''">
+                role_name like concat('%', #{roleName} ,'%')
+            </if>
+            <if test="note != null and note != ''">
+                note like concat('%', #{note} ,'%')
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -16,6 +16,8 @@
         <property name="hostName" value="localhost"/>
         <property name="port" value="6379"/>
         <property name="poolConfig" ref="poolConfig"/>
+        <!--构造方法中配置哨兵-->
+        <constructor-arg name="sentinelConfig" ref="sentinelConfig"/>
     </bean>
 
     <!--使用StringRedisSerializer作为key的序列化器-->
@@ -57,6 +59,32 @@
                     </bean>
                 </entry>
             </map>
+        </property>
+    </bean>
+
+    <!--哨兵配置-->
+    <bean id="sentinelConfig" class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="master">
+            <bean class="org.springframework.data.redis.connection.RedisNode">
+                <property name="name" value="mymaster"/>
+            </bean>
+        </property>
+        <!--哨兵服务IP和端口-->
+        <property name="sentinels">
+            <set>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="localhost"/>
+                    <constructor-arg name="port" value="26379"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="localhost"/>
+                    <constructor-arg name="port" value="26378"/>
+                </bean>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="localhost"/>
+                    <constructor-arg name="port" value="26377"/>
+                </bean>
+            </set>
         </property>
     </bean>
 </beans>

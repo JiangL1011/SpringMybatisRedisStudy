@@ -9,6 +9,7 @@
         <module name="DesignPattern" />
         <module name="MyBatis" />
         <module name="redis" />
+        <module name="spirng_mybatis_redis" />
         <module name="Spring" />
       </profile>
     </annotationProcessing>
