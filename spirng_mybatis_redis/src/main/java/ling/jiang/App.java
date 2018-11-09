@@ -53,7 +53,7 @@ public class App implements TransactionManagementConfigurer {
     public SqlSessionFactoryBean initSqlSessionFactory() {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(initDataSource());
-        ClassPathResource resource = new ClassPathResource("classpath:mybatis-config.xml");
+        ClassPathResource resource = new ClassPathResource("mybatis-config.xml");
         sqlSessionFactory.setConfigLocation(resource);
         return sqlSessionFactory;
     }

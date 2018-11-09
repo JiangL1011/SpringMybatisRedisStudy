@@ -10,6 +10,9 @@
     version: v1.0       
 -->
 <configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
     <mappers>
         <mapper class="ling.jiang.dao.RoleDao"/>
     </mappers>

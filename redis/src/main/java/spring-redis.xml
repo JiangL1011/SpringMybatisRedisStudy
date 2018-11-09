@@ -3,6 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--
+    使用注解驱动，其中属性cache-manager默认值为cacheManager,
+    所以如果使用默认值则无需重新定义
+    -->
+    <!--<cache:annotation-driven cache-manager="cacheManager"/>
+
+    <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+
+    </bean>-->
+
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <!--最大空闲数-->
         <property name="maxIdle" value="50"/>

@@ -1,5 +1,6 @@
 package ling.jiang;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.time.Duration;
 
 /**
- * description:
+ * description: java配置的方式定义缓存管理器
  * author:  JiangL
  * company:
  * date:    2018年11月09日
@@ -25,8 +26,8 @@ import java.time.Duration;
 @Configuration
 @EnableCaching
 public class RedisConfig {
-    @Bean(name = "redisTemplate")
-    public RedisTemplate initRedisTemplate() {
+    @Bean(name = "jedisPoolConfig")
+    public JedisPoolConfig initPoolConfig() {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
 //        最大空闲数
         poolConfig.setMaxIdle(50);
@@ -34,12 +35,22 @@ public class RedisConfig {
         poolConfig.setMaxTotal(100);
 //        最大等待毫秒数
         poolConfig.setMaxWaitMillis(20000);
-//        创建Jedis连接工厂
+        return poolConfig;
+    }
+
+    @Bean(name = "jedisConnectionFactory")
+    public JedisConnectionFactory initConnectionFactory(@Autowired JedisPoolConfig poolConfig) {
+        //        创建Jedis连接工厂
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory(poolConfig);
         connectionFactory.setHostName("localhost");
         connectionFactory.setPort(6379);
 //        调用后初始化风法，没有它将抛出异常
         connectionFactory.afterPropertiesSet();
+        return connectionFactory;
+    }
+
+    @Bean(name = "redisTemplate")
+    public RedisTemplate initRedisTemplate(@Autowired JedisConnectionFactory connectionFactory) {
 //        自定义Redis序列化器
         JdkSerializationRedisSerializer jdkSerializationRedisSerializer = new JdkSerializationRedisSerializer();
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
@@ -56,20 +67,7 @@ public class RedisConfig {
     }
 
     @Bean(name = "redisCacheManager")
-    public CacheManager initRedisCacheManager() {
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-//        最大空闲数
-        poolConfig.setMaxIdle(50);
-//        最大连接数
-        poolConfig.setMaxTotal(100);
-//        最大等待毫秒数
-        poolConfig.setMaxWaitMillis(20000);
-//        创建Jedis连接工厂
-        JedisConnectionFactory connectionFactory = new JedisConnectionFactory(poolConfig);
-        connectionFactory.setHostName("localhost");
-        connectionFactory.setPort(6379);
-//        调用后初始化风法，没有它将抛出异常
-        connectionFactory.afterPropertiesSet();
+    public CacheManager initRedisCacheManager(@Autowired JedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig();
 //        设置缓存有效期为1小时
         configuration.entryTtl(Duration.ofHours(1));
