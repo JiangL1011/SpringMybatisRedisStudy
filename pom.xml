@@ -14,6 +14,7 @@
         <module>Spring</module>
         <module>redis</module>
         <module>spirng_mybatis_redis</module>
+        <module>SSMRedis</module>
     </modules>
 
 </project>

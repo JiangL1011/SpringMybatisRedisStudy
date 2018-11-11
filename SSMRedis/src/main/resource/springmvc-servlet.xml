@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="controller"/>
+
+    <!--处理器映射器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
+    <!--处理器适配器-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+
+    <!--默认装配方案，自动注册映射器和适配器，
+    并提供了数据绑定支持、@NumberFormatannotation、@DateTimeFormat、@Valid支持，
+    以及读写XML的支持，和读写JSON的支持（默认使用Jackson）-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <!--配置json转换器，默认是jackson，使用其他json工具时需要配置-->
+            <bean id="fastJsonHttpMessageConverter"
+                  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=utf-8</value>
+                        <value>application/json;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--静态资源处理-->
+    <mvc:default-servlet-handler/>
+
+    <!--视图解析器-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/page/" p:suffix=".html"/>
+
+    <!--文件上传配置-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10485760"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--如果没有这个目录则spring会自动创建-->
+        <!--<property name="uploadTempDir" value="file:C:/Users/JiangL/Desktop/New folder"/>-->
+    </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*"/>
+            <bean class="interceptor.FirstInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

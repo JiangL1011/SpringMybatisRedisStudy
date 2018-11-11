@@ -11,6 +11,7 @@
         <module name="redis" />
         <module name="spirng_mybatis_redis" />
         <module name="Spring" />
+        <module name="SSMRedis" />
       </profile>
     </annotationProcessing>
   </component>
