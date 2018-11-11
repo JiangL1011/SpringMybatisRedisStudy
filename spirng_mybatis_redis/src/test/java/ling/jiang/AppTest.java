@@ -20,13 +20,23 @@ public class AppTest {
     @Test
     public void insert() {
         Role role = new Role("role_name_5", "role_note_5");
-        int insertCount = roleService.insertRole(role);
-        System.out.println("成功插入 " + insertCount + " 条数据");
+        System.out.println("成功插入数据：\r\n" + roleService.insertRole(role));
     }
 
     @Test
     public void getOne() {
         Role role = roleService.getRole(1L);
         System.out.println(role);
+    }
+
+    @Test
+    public void updateOne() {
+        Role role = new Role(1L, "role_update1", "role_note_update1");
+        System.out.println("成功更新数据" + roleService.updateRole(role));
+    }
+
+    @Test
+    public void deleteOne() {
+        System.out.println("成功删除" + roleService.deleteRole(1L) + "条数据");
     }
 }
