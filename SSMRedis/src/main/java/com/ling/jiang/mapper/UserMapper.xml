@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    
+    description:        
+    author:  JiangL    
+    company:            
+    date:    2018年11月12日   
+    version: v1.0       
+-->
+<mapper namespace="com.ling.jiang.mapper.UserMapper">
+    <resultMap id="userMap" type="com.ling.jiang.bean.User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="username"/>
+        <result column="user_pass" property="password"/>
+    </resultMap>
+
+    <select id="getAllUsers" resultMap="userMap">
+      select * from auth_user
+    </select>
+</mapper>

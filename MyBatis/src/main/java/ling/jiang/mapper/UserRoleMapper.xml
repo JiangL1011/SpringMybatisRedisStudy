@@ -16,7 +16,7 @@
         <id column="role_id" property="roleId"/>
         <result column="role_name" property="roleName"/>
         <collection property="users" column="role_id" fetchType="lazy"
-                    select="ling.jiang.mapper.UserMapper.getUsersByRoleId"/>
+                    select="ling.jiang.UserMapper.getUsersByRoleId"/>
     </resultMap>
 
     <select id="getRoleByRoleId" resultMap="roleMap">

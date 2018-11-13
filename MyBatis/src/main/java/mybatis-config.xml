@@ -39,6 +39,6 @@
 
     <mappers>
         <mapper class="ling.jiang.mapper.UserRoleMapper"/>
-        <mapper class="ling.jiang.mapper.UserMapper"/>
+        <mapper class="ling.jiang.UserMapper"/>
     </mappers>
 </configuration>

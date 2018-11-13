@@ -1,7 +1,9 @@
-package controller;
+package com.ling.jiang.controller;
 
-import bean.User;
+import com.ling.jiang.bean.User;
+import com.ling.jiang.service.UserService;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * description:
@@ -26,6 +29,10 @@ import java.net.URLEncoder;
  */
 @Controller
 public class HelloController {
+    @Autowired
+    private UserService userService;
+
+
     @RequestMapping(value = "/hello1", name = "h1")
     public String hello1(WebRequest request) {
         System.out.println("Hello World!\t1\t" + request);
@@ -100,10 +107,16 @@ public class HelloController {
         return builder.body(FileUtils.readFileToByteArray(file));
     }
 
-    @RequestMapping("interceptor")
+    @RequestMapping("com/ling/jiang/interceptor")
     @ResponseBody
     public void interceptorTest() {
         System.out.println("interceptorTest");
+    }
+
+    @RequestMapping("getAllUsers")
+    @ResponseBody
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 
 }

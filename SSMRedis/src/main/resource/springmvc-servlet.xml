@@ -5,7 +5,7 @@
        xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="com.ling.jiang.*"/>
 
     <!--处理器映射器-->
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
@@ -47,7 +47,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/*"/>
-            <bean class="interceptor.FirstInterceptor"/>
+            <bean class="com.ling.jiang.interceptor.FirstInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 

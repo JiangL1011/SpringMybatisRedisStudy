@@ -8,7 +8,7 @@
     date:    11/1/2018   
     version: v1.0       
 -->
-<mapper namespace="ling.jiang.mapper.UserMapper">
+<mapper namespace="ling.jiang.UserMapper">
     <!--开启二级缓存，且POJO必须实现序列化接口，SqlSession必须提交-->
     <cache/>
 
