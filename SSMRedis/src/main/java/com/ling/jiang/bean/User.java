@@ -13,6 +13,7 @@ import java.io.Serializable;
  * version: v1.0
  */
 public class User implements Serializable {
+    private static final long serialVersionUID = -4016982242445300826L;
     private int userId;
     private String username;
     @Pattern(regexp = "\\d+", message = "密码必须是数字")

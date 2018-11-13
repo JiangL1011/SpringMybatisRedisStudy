@@ -1,0 +1,37 @@
+<!--    
+    description:        
+    author:  JiangL    
+    company:            
+    date:    2018年11月13日   
+    version: v1.0       
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta content="UTF-8"/>
+    <title>redPacket</title>
+</head>
+<body>
+<button id="grab">grab</button>
+<br>
+<div id="result"></div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $('#grab').click(function () {
+        for (let i = 1; i <= 1; i++) {
+            $.ajax({
+                type: 'post',
+                async: true,
+                url: '/grabRedPacket?redPacketId=1&userId=' + i,
+                success: function (data) {
+                    data = typeof data === 'string' ? JSON.parse(data) : data;
+                    if (!data.success) {
+                        $('#result').append('<p>' + data.message + '</p>')
+                    }
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

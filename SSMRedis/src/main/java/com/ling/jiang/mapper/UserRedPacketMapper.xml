@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--    
+    description:        
+    author:  JiangL    
+    company:            
+    date:    2018年11月13日   
+    version: v1.0       
+-->
+<mapper namespace="com.ling.jiang.mapper.UserRedPacketMapper">
+
+    <insert id="grabRedPacket" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user_red_packet (
+        red_packet_id, user_id, amount, grab_time, note
+        ) values (
+        #{userRedPacket.redPacketId}, #{userRedPacket.userId}, #{userRedPacket.amount},
+        #{userRedPacket.grabTime}, #{userRedPacket.note}
+        )
+    </insert>
+</mapper>

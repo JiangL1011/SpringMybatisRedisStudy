@@ -46,7 +46,7 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/*"/>
+            <mvc:mapping path="/interceptor/*"/>
             <bean class="com.ling.jiang.interceptor.FirstInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
