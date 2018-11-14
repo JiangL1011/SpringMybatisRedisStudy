@@ -1,11 +1,13 @@
 package com.ling.jiang.service;
 
 import com.ling.jiang.bean.UserRedPacket;
+import com.ling.jiang.util.ReadLuaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class RedisRedPacketServiceImpl implements RedisRedPacketService {
     // 开启新线程运行
     @Async
     public void saveUserRedPacketByRedis(Integer redPacketId, Double unitAmount) {
-        System.err.println(Thread.currentThread().getName() + "\t开始保存数据......");
+        System.err.println(Thread.currentThread().getName() + "\tStart saving data......");
         long start = System.currentTimeMillis();
         // 获取列表操作对象
         BoundListOperations<String, Object> ops = redisTemplate.boundListOps(
@@ -75,6 +77,15 @@ public class RedisRedPacketServiceImpl implements RedisRedPacketService {
         // 删除Redis列表
         redisTemplate.delete(PREFIX + redPacketId);
         long end = System.currentTimeMillis();
-        System.err.println("保存数据结束，耗时\t" + (end - start) + "\t毫秒，共\t" + count + "\t条记录被保存。");
+        System.err.println("End saving, cost " + (end - start) + " ms, " + count + " data have been saved.");
+    }
+
+    @Override
+    public void initUserRedPacketByRedis(String luaFile) {
+        String script = ReadLuaUtil.read(luaFile);
+        // 获取底层Redis操作对象
+        Jedis jedis = (Jedis) redisTemplate.getConnectionFactory().getConnection().getNativeConnection();
+        String sha1 = jedis.scriptLoad(script);
+        jedis.evalsha(sha1);
     }
 }

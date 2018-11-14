@@ -12,13 +12,14 @@
     <title>redPacket</title>
 </head>
 <body>
+<button id="send">初始化</button>&nbsp;
 <button id="grab">grab</button>
 <br>
 <div id="result"></div>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $('#grab').click(function () {
-        for (let i = 1; i <= 1; i++) {
+        for (let i = 1; i <= 2500; i++) {
             $.ajax({
                 type: 'post',
                 async: true,
@@ -31,6 +32,21 @@
                 }
             });
         }
+    });
+
+    $('#send').click(function () {
+        $.ajax({
+            type: 'post',
+            async: true,
+            url: '/sendRedPacket',
+            success: function (msg) {
+                if (msg) {
+                    alert('初始化成功');
+                } else {
+                    alert('初始化失败');
+                }
+            }
+        });
     });
 </script>
 </body>

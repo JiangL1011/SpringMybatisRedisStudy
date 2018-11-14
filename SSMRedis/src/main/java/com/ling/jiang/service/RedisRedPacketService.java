@@ -9,4 +9,6 @@ package com.ling.jiang.service;
  */
 public interface RedisRedPacketService {
     void saveUserRedPacketByRedis(Integer redPacketId, Double unitAmount);
+
+    void initUserRedPacketByRedis(String luaFile);
 }

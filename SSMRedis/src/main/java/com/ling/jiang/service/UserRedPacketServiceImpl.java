@@ -89,7 +89,7 @@ public class UserRedPacketServiceImpl implements UserRedPacketService {
                 sha1 = jedis.scriptLoad(script);
             }
             // 执行脚本，返回结果
-            result = (Integer) jedis.evalsha(sha1, 1, redPacketId + "", args);
+            result = Integer.parseInt(String.valueOf(jedis.evalsha(sha1, 1, redPacketId + "", args)));
             // 返回2时为最后一个红包，此时将抢红包信息通过异步保存到数据库中
             if (result == 2) {
                 // 获取单个小红包金额
@@ -98,6 +98,9 @@ public class UserRedPacketServiceImpl implements UserRedPacketService {
                 double unitAmount = Double.parseDouble(unitAmountStr);
                 redisRedPacketService.saveUserRedPacketByRedis(redPacketId, unitAmount);
             }
+        /*}catch (Exception e){
+            e.printStackTrace();
+            return FAILED;*/
         } finally {
             // 确保jedis顺利关闭
             if (jedis.isConnected()) jedis.close();

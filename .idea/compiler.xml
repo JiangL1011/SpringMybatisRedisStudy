@@ -15,4 +15,15 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DesignPattern" options="" />
+      <module name="MyBatis" options="" />
+      <module name="SSMRedis" options="" />
+      <module name="Spring" options="" />
+      <module name="redis" options="" />
+      <module name="spirng_mybatis_redis" options="" />
+    </option>
+  </component>
 </project>
