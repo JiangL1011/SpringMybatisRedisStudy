@@ -12,7 +12,7 @@
     <title>redPacket</title>
 </head>
 <body>
-<button id="send">初始化</button>&nbsp;
+<button id="send">init</button>&nbsp;
 <button id="grab">grab</button>
 <br>
 <div id="result"></div>
@@ -41,9 +41,9 @@
             url: '/sendRedPacket',
             success: function (msg) {
                 if (msg) {
-                    alert('初始化成功');
+                    alert('success');
                 } else {
-                    alert('初始化失败');
+                    alert('failed');
                 }
             }
         });
