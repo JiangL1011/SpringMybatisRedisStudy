@@ -47,7 +47,7 @@ public class RedisRedPacketServiceImpl implements RedisRedPacketService {
         List<UserRedPacket> userRedPackets = new ArrayList<>(TIME_SIZE);
         for (int i = 0; i < times; i++) {
             // 获取至多TIME_SIZE个抢红包信息
-            List<Object> userIdList = null;
+            List<Object> userIdList;
             if (i == 0) {
                 userIdList = ops.range(i * TIME_SIZE, (i + 1) * TIME_SIZE);
             } else {
